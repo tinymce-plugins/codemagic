@@ -96,3 +96,7 @@ span.CodeMirror-selected {
     width: 200px; 
     height: 144px;
 }
+
+.wrapText {
+    word-wrap: break-word;
+}

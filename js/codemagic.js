@@ -2,7 +2,8 @@
 var the = { 
     beautify_in_progress: false,
     coloring_active: true,
-    autocompletion_active: true
+    autocompletion_active: true,
+    wraptext_active: true
 } 
 var hlLine = null; 
 var lastPos = null;
@@ -48,7 +49,7 @@ tinyMCEPopup.onInit.add(onLoadInit);
 //onload
 function onLoadInit() {
 	tinyMCEPopup.resizeToInnerSize();
-    
+
     // Remove Gecko spellchecking
 	if (tinymce.isGecko)
 		document.body.spellcheck = tinyMCEPopup.editor.getParam("gecko_spellcheck");
@@ -64,6 +65,14 @@ function onLoadInit() {
         activateCodeColoring("htmlSource");
     }
     
+    // Add word wrapping. Must be done after beautify() is called.
+    if (the.wraptext_active) {
+	activateWrapText();
+	document.getElementById('wraptext').checked = true;
+    } else {
+	document.getElementById('wraptext').checked = false;
+    }
+
     //resize window to fit the textarea
     resizeInputs("htmlSource"); 
     
@@ -106,8 +115,29 @@ function deactivateCodeColoring() {
     resizeInputs("htmlSource"); 
 }
 
+function activateWrapText() {
+	the.wraptext_active = true;
 
-//toggle highlighting usint a checkbox
+	var elm = document.getElementById("htmlSource").nextSibling;
+	if (elm.className.indexOf("wrapText") == -1) {
+		elm.className += ' wrapText';
+	}
+}
+
+function deactivateWrapText() {
+        the.wraptext_active = false;
+
+	var elm = document.getElementById("htmlSource").nextSibling;
+	var classes = elm.className.split(" ");
+	var wrap = classes.indexOf("wrapText");
+
+	if (wrap) {
+		classes.splice(wrap, 1);
+		elm.className = classes.join(" ");
+	}
+}
+
+//toggle highlighting using a checkbox
 function toggleHighlighting(elm, id) {
     if (elm.checked) {
         activateCodeColoring(id);
@@ -122,6 +152,15 @@ function toggleAutocompletion(elm) {
         the.autocompletion_active = true;
     } else {
         the.autocompletion_active = false;
+    }
+}     
+
+//toggle text wrapping
+function toggleWrapText(elm) {
+    if (elm.checked) {
+        activateWrapText();
+    } else {
+        deactivateWrapText();
     }
 }     
 

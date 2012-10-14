@@ -3,6 +3,7 @@ tinyMCE.addI18n('en.codemagic_dlg',{
     code_label: "Edit code",
     toggle_highlighting: "Syntax highlighting",
     toggle_autocompletion: "Auto completion",
+    toggle_wraptext: "Wrap text",
     search: "Search",
     replace: "Replace",
     undo: "Undo",
