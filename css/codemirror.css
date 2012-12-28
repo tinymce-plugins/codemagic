@@ -1,6 +1,7 @@
 .CodeMirror {
   overflow: auto;
-  height: 90%;
+  height: 520px;
+  /*height: 90%;*/
   line-height: 14px;
   font-size: 13px;
   font-family: monospace;
