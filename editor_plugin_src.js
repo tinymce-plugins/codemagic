@@ -8,7 +8,7 @@
 					file : url + '/codemagic.htm',
 					width : 900 + parseInt(ed.getLang('codemagic.delta_width', 0)),
 					height : 450 + parseInt(ed.getLang('codemagic.delta_height', 0)),
-					inline : 0
+					inline : false
 				}, {
 					plugin_url : url
 				});

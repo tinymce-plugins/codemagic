@@ -8,6 +8,10 @@ CodeMagic is a replacement source code editor plugin for Tinymce which integrate
 2. In the *plugins* section of your *tinyMCE.init* add **codemagic**
 3. In your *buttons* configuration (eg, *theme\_advanced\_buttons3*) add **codemagic** (you would usually replace the *code* entry)
 
+By default the key used for localStorage is 'tinymce:codemagic:theme' and every instance of TinyMCE you use with the CodeMagic plugin will retain the same theme (if your browser supports localStorage).  If you'd like to have different themes saved for different instances, then in your *tinyMCE.init* you should add:
+
+    codemagic_storage_key : 'your_key_name_here'
+
 ## Changes in this fork from original CodeMagic plugin
 
 1. Uses latest version of CodeMirror which is included as a complete package and not within the CodeMirror js itself

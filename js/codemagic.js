@@ -1,13 +1,15 @@
 tinyMCEPopup.requireLangPack();
 tinyMCEPopup.onInit.add(_init);
 var cmEditor;
+var localStorageKey = tinyMCEPopup.editor.getParam('codemagic_storage_key') 
+    || 'tinymce:codemagic:theme';
 
 function _init() 
 {
     tinyMCEPopup.resizeToInnerSize();
 
     if (tinymce.isGecko) {
-        document.body.spellcheck = tinyMCEPopup.editor.getParam("gecko_spellcheck");
+        document.body.spellcheck = tinyMCEPopup.editor.getParam('gecko_spellcheck');
     }
 
     document.getElementById('htmlSource').value = tinyMCEPopup.editor.getContent({
@@ -26,15 +28,15 @@ function _init()
         autoCloseTags : true,
         theme         : 'default'
     });
-    if (supports_html5_storage() && localStorage.getItem('tinymce:codemagic:theme')) {
+    if (supports_html5_storage() && localStorage.getItem(localStorageKey)) {
         var sel = document.getElementById('themeselect');
         for (var i, j = 0; i = sel.options[j]; j++) {
-            if (i.value == localStorage.getItem('tinymce:codemagic:theme')) {
+            if (i.value == localStorage.getItem(localStorageKey)) {
                 sel.selectedIndex = j;
                 break;
             }
         }
-        cmEditor.setOption("theme", localStorage.getItem('tinymce:codemagic:theme'));
+        cmEditor.setOption('theme', localStorage.getItem(localStorageKey));
     }
     resize();
 }
@@ -61,16 +63,16 @@ function toggle(which, el)
     switch (which) {
         case 'theme':
             var theme = el.options[el.selectedIndex].innerHTML;
-            cmEditor.setOption("theme", theme);
+            cmEditor.setOption('theme', theme);
             if (supports_html5_storage()) {
-                localStorage.setItem('tinymce:codemagic:theme', theme);
+                localStorage.setItem(localStorageKey, theme);
             }
             break;
         case 'wrap':
-            cmEditor.setOption("lineWrapping", el.checked);
+            cmEditor.setOption('lineWrapping', el.checked);
             break;
         case 'autoclosetags':
-            cmEditor.setOption("autoCloseTags", el.checked);
+            cmEditor.setOption('autoCloseTags', el.checked);
             break;
     }
     return false;
