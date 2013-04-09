@@ -1,8 +1,9 @@
 tinyMCEPopup.requireLangPack();
 tinyMCEPopup.onInit.add(_init);
 var cmEditor;
+var cmActive;
 var localStorageKey = tinyMCEPopup.editor.getParam('codemagic_storage_key') 
-    || 'tinymce:codemagic:theme';
+    || 'tinymce:codemagic';
 
 function _init() 
 {
@@ -16,7 +17,15 @@ function _init()
         source_view : true
     });
 
+    var settings = get_settings();
     setup_editor();
+    cmActive = true;
+    document.getElementById('toggleWrap').checked = settings.wrap;
+    toggle('wrap', document.getElementById('toggleWrap'));
+    document.getElementById('toggleAutoclose').checked = settings.autoclose;
+    toggle('autoclosetags', document.getElementById('toggleAutoclose'));
+    document.getElementById('toggleHighlight').checked = settings.highlight;
+    toggle('highlight', document.getElementById('toggleHighlight'));
     resize();
 }
 
@@ -44,9 +53,6 @@ function toggle(which, el)
         case 'theme':
             var theme = el.options[el.selectedIndex].innerHTML;
             cmEditor.setOption('theme', theme);
-            if (supports_html5_storage()) {
-                localStorage.setItem(localStorageKey, theme);
-            }
             break;
         case 'wrap':
             cmEditor.setOption('lineWrapping', el.checked);
@@ -56,21 +62,26 @@ function toggle(which, el)
             break;
         case 'highlight':
             if (el.checked) {
-                setup_editor();
+                if (!cmActive) {
+                    setup_editor();
+                }
                 resize();
                 document.getElementById('toggleWrap').disabled      = false;
                 document.getElementById('toggleAutoclose').disabled = false;
                 document.getElementById('themeselect').disabled     = false;
                 document.getElementById('searchKeys').style.display = 'block';
+                cmActive = true;
             } else {
                 cmEditor.toTextArea();
                 document.getElementById('toggleWrap').disabled      = true;
                 document.getElementById('toggleAutoclose').disabled = true;
                 document.getElementById('themeselect').disabled     = true;
                 document.getElementById('searchKeys').style.display = 'none';
+                cmActive = false;
             }
             break;
     }
+    save_settings();
     return false;
 }
 
@@ -88,15 +99,45 @@ function setup_editor()
         autoCloseTags : true,
         theme         : 'default'
     });
-    if (supports_html5_storage() && localStorage.getItem(localStorageKey)) {
+    var settings = get_settings();
+    if (settings.theme) {
         var sel = document.getElementById('themeselect');
         for (var i, j = 0; i = sel.options[j]; j++) {
-            if (i.value == localStorage.getItem(localStorageKey)) {
+            if (i.value == settings.theme) {
                 sel.selectedIndex = j;
                 break;
             }
         }
-        cmEditor.setOption('theme', localStorage.getItem(localStorageKey));
+        cmEditor.setOption('theme', settings.theme);
+    }
+}
+
+function get_settings()
+{
+    if (supports_html5_storage()) {
+        var settings = localStorage.getItem(localStorageKey);
+        if (settings) {
+            return JSON.parse(settings);
+        }
+    }
+    return {
+        highlight: document.getElementById('toggleHighlight').checked,
+        wrap: document.getElementById('toggleWrap').checked,
+        autoclose: document.getElementById('toggleAutoclose').checked,
+        theme: document.getElementById('themeselect').options[document.getElementById('themeselect').selectedIndex].innerHTML
+    };
+}
+
+function save_settings()
+{
+    if (supports_html5_storage()) {
+        var settings = JSON.stringify({
+            highlight: document.getElementById('toggleHighlight').checked,
+            wrap: document.getElementById('toggleWrap').checked,
+            autoclose: document.getElementById('toggleAutoclose').checked,
+            theme: document.getElementById('themeselect').options[document.getElementById('themeselect').selectedIndex].innerHTML
+        });
+        localStorage.setItem(localStorageKey, settings);
     }
 }
 
