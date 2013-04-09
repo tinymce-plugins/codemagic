@@ -57,8 +57,17 @@ function toggle(which, el)
         case 'highlight':
             if (el.checked) {
                 setup_editor();
+                resize();
+                document.getElementById('toggleWrap').disabled      = false;
+                document.getElementById('toggleAutoclose').disabled = false;
+                document.getElementById('themeselect').disabled     = false;
+                document.getElementById('searchKeys').style.display = 'block';
             } else {
                 cmEditor.toTextArea();
+                document.getElementById('toggleWrap').disabled      = true;
+                document.getElementById('toggleAutoclose').disabled = true;
+                document.getElementById('themeselect').disabled     = true;
+                document.getElementById('searchKeys').style.display = 'none';
             }
             break;
     }

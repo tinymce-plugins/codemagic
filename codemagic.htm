@@ -48,11 +48,11 @@
             </div>
             <div id="editorOptions" style="float: right">
                 <label style="margin-right:4em;">
-                    <input type="checkbox" onclick="toggle('highlight', this);" checked="checked" /> {#codemagic_dlg.toggle_highlight}</label>
+                    <input id="toggleHighlight" type="checkbox" onclick="toggle('highlight', this);" checked="checked" /> {#codemagic_dlg.toggle_highlight}</label>
                 <label style="margin-right:4em;">
-                    <input type="checkbox" onclick="toggle('wrap', this);" checked="checked" /> {#codemagic_dlg.toggle_wraptext}</label>
+                    <input id="toggleWrap" type="checkbox" onclick="toggle('wrap', this);" checked="checked" /> {#codemagic_dlg.toggle_wraptext}</label>
                 <label style="margin-right:4em;">
-                    <input type="checkbox" onclick="toggle('autoclosetags', this);" checked="checked" /> {#codemagic_dlg.toggle_autoclosetags}</label>
+                    <input id="toggleAutoclose" type="checkbox" onclick="toggle('autoclosetags', this);" checked="checked" /> {#codemagic_dlg.toggle_autoclosetags}</label>
                 <label>{#codemagic_dlg.theme_select}: <select id="themeselect" onchange="toggle('theme', this);">
                     <option>default</option>
                     <option>ambiance</option>
@@ -80,7 +80,7 @@
         <textarea name="htmlSource" id="htmlSource" style="width:100%;height:20em;" class="htmlSource"></textarea>
 
         <div class="mceActionPanel" id="mceActionPanel">
-            <p style="margin-top:0;"><strong>{#codemagic_dlg.search}</strong>: Ctrl-F / Cmd-F, <strong>{#codemagic_dlg.find_next}</strong>: Ctrl-G / Cmd-G, <strong>{#codemagic_dlg.find_previous}</strong>: Shift-Ctrl-G / Shift-Cmd-G<br />
+            <p style="margin-top:0;" id="searchKeys"><strong>{#codemagic_dlg.search}</strong>: Ctrl-F / Cmd-F, <strong>{#codemagic_dlg.find_next}</strong>: Ctrl-G / Cmd-G, <strong>{#codemagic_dlg.find_previous}</strong>: Shift-Ctrl-G / Shift-Cmd-G<br />
             <strong>{#codemagic_dlg.replace}</strong>: Shift-Ctrl-F / Cmd-Option-F, <strong>{#codemagic_dlg.replace_all}</strong>: Shift-Ctrl-R / Shift-Cmd-Option-F</p>
             <input type="submit" role="button" name="insert" value="{#update}" id="insert" />
             <input type="button" role="button" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" id="cancel" />
