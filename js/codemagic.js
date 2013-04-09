@@ -16,6 +16,57 @@ function _init()
         source_view : true
     });
 
+    setup_editor();
+    resize();
+}
+
+function save()
+{
+    tinyMCEPopup.editor.setContent(cmEditor.getValue(), {
+        source_view : true
+    }); 
+    tinyMCEPopup.close();
+}
+
+function resize()
+{
+    var vp = tinyMCEPopup.dom.getViewPort(window);
+    var size = vp.h - 85
+        - document.getElementById('headerContainer').offsetHeight;
+        - document.getElementById('mceActionPanel').offsetHeight;
+    cmEditor.setSize('100%', size + 'px');
+    document.getElementById('htmlSource').style.height = size + 'px';
+}
+
+function toggle(which, el)
+{
+    switch (which) {
+        case 'theme':
+            var theme = el.options[el.selectedIndex].innerHTML;
+            cmEditor.setOption('theme', theme);
+            if (supports_html5_storage()) {
+                localStorage.setItem(localStorageKey, theme);
+            }
+            break;
+        case 'wrap':
+            cmEditor.setOption('lineWrapping', el.checked);
+            break;
+        case 'autoclosetags':
+            cmEditor.setOption('autoCloseTags', el.checked);
+            break;
+        case 'highlight':
+            if (el.checked) {
+                setup_editor();
+            } else {
+                cmEditor.toTextArea();
+            }
+            break;
+    }
+    return false;
+}
+
+function setup_editor()
+{
     cmEditor = CodeMirror.fromTextArea(document.getElementById('htmlSource'), {
         mode          : 'text/html',
         width         : '100%',
@@ -38,44 +89,6 @@ function _init()
         }
         cmEditor.setOption('theme', localStorage.getItem(localStorageKey));
     }
-    resize();
-}
-
-function save()
-{
-    tinyMCEPopup.editor.setContent(cmEditor.getValue(), {
-        source_view : true
-    }); 
-    tinyMCEPopup.close();
-}
-
-function resize()
-{
-    var vp = tinyMCEPopup.dom.getViewPort(window);
-    var size = vp.h - 85
-        - document.getElementById('headerContainer').offsetHeight;
-        - document.getElementById('mceActionPanel').offsetHeight;
-    cmEditor.setSize('100%', size + 'px');
-}
-
-function toggle(which, el)
-{
-    switch (which) {
-        case 'theme':
-            var theme = el.options[el.selectedIndex].innerHTML;
-            cmEditor.setOption('theme', theme);
-            if (supports_html5_storage()) {
-                localStorage.setItem(localStorageKey, theme);
-            }
-            break;
-        case 'wrap':
-            cmEditor.setOption('lineWrapping', el.checked);
-            break;
-        case 'autoclosetags':
-            cmEditor.setOption('autoCloseTags', el.checked);
-            break;
-    }
-    return false;
 }
 
 function supports_html5_storage()

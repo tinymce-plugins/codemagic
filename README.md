@@ -15,8 +15,7 @@ By default the key used for localStorage is 'tinymce:codemagic:theme' and every 
 ## Changes in this fork from original CodeMagic plugin
 
 1. Uses latest version of CodeMirror which is included as a complete package and not within the CodeMirror js itself
-2. Removes the ability to turn off syntax highlighting (what's the point of it otherwise?!)
-3. Relies on CodeMirror to perform the search/replace and screen wrap functionality
-4. Uses CodeMirror's themes and, if you have local storage capabilities in your browser, will remember your choice
-5. Currently doesn't use JS Beautifier
-6. Various other bits and bobs
+2. Relies on CodeMirror to perform the search/replace and screen wrap functionality
+3. Uses CodeMirror's themes and, if you have local storage capabilities in your browser, will remember your choice
+4. Currently doesn't use JS Beautifier
+5. Various other bits and bobs
