@@ -244,8 +244,8 @@ function style_html(html_source, indent_size, indent_character, max_char, brace_
                 }
 
                 // Cases where previous space should disappear
-                if (content[content.length - 1] === '<' || // if last stored char was '<' no space after it (e.g. "< a> -> "<a>)
-                	input_char === '=') {              // no space before '=' (e.g. "<a href ='/code/"> -> "<a href='/code/'>)
+                if (content[content.length - 1] === '<' ||  // if last stored char was '<' no space after it (e.g. "< a> -> "<a>)
+                	input_char === '=')                 // no space before '=' (e.g. "<a href ='/code/"> -> "<a href='/code/'>)
                 	// input_char !== '>')
                 {
                     space = false;
