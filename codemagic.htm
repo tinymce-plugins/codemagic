@@ -6,7 +6,7 @@
     <script type="text/javascript" src="js/codemagic.js"></script>
     <script type="text/javascript" src="js/beautify.js"></script>
     <script type="text/javascript" src="js/beautify-html.js"></script>
-    
+
     <link rel="stylesheet" media="all" type="text/css" href="css/style.css"  />
     <link rel="stylesheet" media="all" type="text/css" href="css/codemirror.css"  />
     <link rel="stylesheet" media="all" type="text/css" href="css/default.css" />
@@ -22,15 +22,15 @@
             <a id="search_replace" href="javascript: void(0)" title="{#codemagic_dlg.search_replace}" onclick="toggleSearch(this, 'searchWindow');"><img src="img/icons/lens.png" alt="{#codemagic_dlg.search_replace}" /></a>
             <a id="reintendt" href="javascript: void(0)" title="{#codemagic_dlg.reintendt}" onclick="reIntendt('htmlSource');"><img src="img/icons/file.png" alt="{#codemagic_dlg.reintendt}" /></a>
             <div style="clear: both;"></div>
-        </div>  
-        
+        </div>
+
         <div id="wrapline" style="float: right">
             <input type="checkbox" name="wraptext" id="wraptext" onclick="toggleWrapText(this);" class="wordWrapCode" checked="checked" /><label for="wraptext">{#codemagic_dlg.toggle_wraptext}</label> &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="checkbox" name="autocompletion" id="autocompletion" onclick="toggleAutocompletion(this);" class="wordWrapCode" checked="checked" /><label for="autocompletion">{#codemagic_dlg.toggle_autocompletion}</label> &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="checkbox" name="highlighting" id="highlighting" onclick="toggleHighlighting(this, 'htmlSource');" class="wordWrapCode" checked="checked" /><label for="highlighting">{#codemagic_dlg.toggle_highlighting}</label>
         </div>
         <div style="clear: both;"></div>
-        
+
 
         <div id="searchWindow" class="search-window" style="display: none;">
             <h2>{#codemagic_dlg.search_replace}</h2>
@@ -53,9 +53,9 @@
                     <td align="left"><input onclick="searchCode(); return false;" type="submit" value="{#codemagic_dlg.search}" class="button" style="float: none" /></td>
                     <td align="right"><input onclick="replaceCode(); return false;" type="submit" value="{#codemagic_dlg.replace}" class="button"  style="float: none" /></td>
                 </tr>
-            </table> 
+            </table>
         </div>
-        
+
         <textarea name="htmlSource" id="htmlSource" rows="15" cols="100" dir="ltr" class="htmlSource"></textarea>
 
 		<div class="mceActionPanel">

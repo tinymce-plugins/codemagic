@@ -1,3 +1,3 @@
-tinyMCE.addI18n('en.codemagic',{
+tinyMCE.addI18n('en.codemagic', {
     editor_button: "Edit source code"
 });

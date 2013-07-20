@@ -1,4 +1,4 @@
-tinyMCE.addI18n('de.codemagic_dlg',{
+tinyMCE.addI18n('de.codemagic_dlg', {
     code_title: "CodeMagic - Syntax Hervorhebung und Einzug",
     code_label: "HTML Code bearbeiten",
     toggle_highlighting: "Syntax Hervorhebung",

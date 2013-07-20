@@ -6,7 +6,7 @@
     font-size: 13px;
     font-family: monospace;
     background-color: #fff;
-    border: 1px solid #abc6dd; 
+    border: 1px solid #abc6dd;
     _position: relative; /* IE6 hack */
 }
 
@@ -36,7 +36,7 @@
 }
 
 .CodeMirror pre.activeline {
-    background: none repeat scroll 0 0 #efefef !important;    
+    background: none repeat scroll 0 0 #efefef !important;
 }
 
 .CodeMirror-cursor {
@@ -93,13 +93,13 @@ span.CodeMirror-selected {
     position: absolute;
     border: 1px solid #000000;
     background-color: #F0F0EE;
-    padding: 3px; 
+    padding: 3px;
 }
 
 .completions select {
     background-color: #FFFFFF;
     border: 1px solid #B5A69C;
-    width: 200px; 
+    width: 200px;
     height: 144px;
 }
 

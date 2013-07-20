@@ -9,12 +9,10 @@
 
 (function () {
     tinymce.PluginManager.requireLangPack('codemagic');
-	tinymce.create('tinymce.plugins.CodeMagic', {
-
-		init: function (ed, url) {
-			
+    tinymce.create('tinymce.plugins.CodeMagic', {
+        init: function (ed, url) {
             // Register commands
-			ed.addCommand('mceCodeMagic', function() {
+            ed.addCommand('mceCodeMagic', function() {
                 ed.windowManager.open({
                     file : url + '/codemagic.htm',
                     width : 900,
@@ -26,29 +24,28 @@
                 });
             });
 
-			// Register buttons
-			ed.addButton('codemagic', {
-				title: 'codemagic.editor_button', 
-                cmd: 'mceCodeMagic', 
+            // Register buttons
+            ed.addButton('codemagic', {
+                title: 'codemagic.editor_button',
+                cmd: 'mceCodeMagic',
                 image: url + '/img/code.png'
-			});
+            });
 
-			ed.onNodeChange.add(function(ed, cm, n, co) {
+            ed.onNodeChange.add(function(ed, cm, n, co) {
                 cm.setDisabled('link', co && n.nodeName != 'A');
                 cm.setActive('link', n.nodeName == 'A' && !n.name);
             });
-		},
+        },
+        getInfo: function () {
+             return {
+                longname: 'CodeMagic - syntax coloring and intendation',
+                author: 'Sutulustus',
+                authorurl: 'http://www.triad.sk/#/en',
+                version: '0.9.5'
+             };
+        }
+    });
 
-		getInfo: function () {
-			return {
-				longname: 'CodeMagic - syntax coloring and intendation',
-				author: 'Sutulustus',
-				authorurl: 'http://www.triad.sk/#/en',
-				version: '0.9.5'
-			};
-		}
-	});
-
-	// Register plugin
-	tinymce.PluginManager.add('codemagic', tinymce.plugins.CodeMagic);
+    // Register plugin
+    tinymce.PluginManager.add('codemagic', tinymce.plugins.CodeMagic);
 })();

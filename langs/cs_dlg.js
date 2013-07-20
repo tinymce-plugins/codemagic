@@ -1,4 +1,4 @@
-tinyMCE.addI18n('cs.codemagic_dlg',{
+tinyMCE.addI18n('cs.codemagic_dlg', {
     code_title: "CodeMagic - zvýraznení syntaxe a formátování kódu",
     code_label: "Editovat kód",
     toggle_highlighting: "Zvýraznení kódu",

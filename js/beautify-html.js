@@ -519,9 +519,9 @@ function style_html(html_source, indent_size, indent_character, max_char, brace_
             	// Currently puts all content as it gets it using get_unformatted. Could call style_html() recursively on it.
 
                 // text preceeding and adjacent to inline tag with out space in between
-                if (    
+                if (
                         // it seems CONTENT is not guaranteed after a TAG (verified through logging of long HTML samples) hence the explicit condition statements
-                        (last_token_had_trailing_whitespace && (multi_parser.last_token === "TK_CONTENT")) || 
+                        (last_token_had_trailing_whitespace && (multi_parser.last_token === "TK_CONTENT")) ||
                         // empty string between current inline tag and previous tag is not inline
                         (!multi_parser.last_text && (multi_parser.last_tag_token !== "TK_TAG_INLINE"))
                    )

@@ -1,4 +1,4 @@
-tinyMCE.addI18n('fr.codemagic_dlg',{
+tinyMCE.addI18n('fr.codemagic_dlg', {
     code_title: "CodeMagic - coloration syntaxique et indentation",
     code_label: "Modifier Code",
     toggle_highlighting: "Coloration syntaxique",
