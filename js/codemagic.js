@@ -3,7 +3,7 @@ var the = {
     beautify_in_progress: false,
     coloring_active: true,
     autocompletion_active: true,
-    wraptext_active: true
+    wraptext_active: false
 } 
 var hlLine = null; 
 var lastPos = null;
