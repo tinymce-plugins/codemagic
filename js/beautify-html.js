@@ -39,8 +39,8 @@ function style_html(html_source, indent_size, indent_character, max_char, brace_
        which will be called as needed by an instance of Parser */
     function Parser() {
         this.pos = 0; // Parser position
-		this.found_leading_whitespace = false;
-		this.found_trailing_whitespace = false;
+        this.found_leading_whitespace = false;
+        this.found_trailing_whitespace = false;
         this.token = '';
         this.current_mode = 'CONTENT'; // reflects the current Parser mode: TAG/CONTENT
         this.tags = { // An object to hold tags, their position, and their parent-tags, initiated with default values
@@ -179,8 +179,7 @@ function style_html(html_source, indent_size, indent_character, max_char, brace_
                 this.tags[tag + 'count'] = 1;
                 this.tags[tag + this.tags[tag + 'count']] = this.indent_level; // and record the present indent level
             }
-            this.tags[tag + this.tags[tag + 'count'] + 'parent'] =
-                this.tags.parent; // set the parent (i.e. in the case of a div this.tags.div1parent)
+            this.tags[tag + this.tags[tag + 'count'] + 'parent'] = this.tags.parent; // set the parent (i.e. in the case of a div this.tags.div1parent)
             this.tags.parent = tag + this.tags[tag + 'count']; // and make this the current parent (i.e. in the case of a div 'div1')
         } /* End of Function: record_tag(tag) */
 
@@ -190,8 +189,7 @@ function style_html(html_source, indent_size, indent_character, max_char, brace_
                 var temp_parent = this.tags.parent; // check to see if it's a closable tag.
 
                 while (temp_parent) { // till we reach '' (the initial value);
-                    if (tag + this.tags[tag + 'count'] ===
-                        temp_parent) { // if this is it use it
+                    if (tag + this.tags[tag + 'count'] === temp_parent) { // if this is it use it
                         break;
                     }
 
@@ -199,10 +197,8 @@ function style_html(html_source, indent_size, indent_character, max_char, brace_
                 }
 
                 if (temp_parent) { // if we caught something
-                    this.indent_level = this.tags[tag + this.tags[tag +
-                        'count']]; // set the indent_level accordingly
-                    this.tags.parent = this.tags[temp_parent +
-                        'parent']; // and set the current parent
+                    this.indent_level = this.tags[tag + this.tags[tag + 'count']]; // set the indent_level accordingly
+                    this.tags.parent = this.tags[temp_parent + 'parent']; // and set the current parent
                 }
 
                 delete this.tags[tag + this.tags[tag + 'count'] + 'parent']; // delete the closed tags parent reference...
@@ -255,7 +251,7 @@ function style_html(html_source, indent_size, indent_character, max_char, brace_
                     space = false;
                 }
 
-				// Case for determining what do with previous whitespace
+                // Case for determining what do with previous whitespace
                 if (space && content.length && 		   	// if previous character was non-leading whitespace (came after some content)
                     content[content.length - 1] !== '=' && 	// if last stored char was "=" no space after it (e.g. "<a href= '/code/"> -> "<a href='/code/'>)
                     input_char !== '>') {			// no space before '>' (e.g. "<a href='/code/" > -> "<a href='/code/'>)
@@ -304,16 +300,14 @@ function style_html(html_source, indent_size, indent_character, max_char, brace_
                 this.tag_type = 'STYLE';
             }
             else if (this.Utils.in_array(tag_check, this.Utils.inline_token)) { // check if current tag is an inline element
-                var inline_element = this.get_unformatted('</' + tag_check + '>',
-                    tag_complete); //...delegate to get_unformatted function
+                var inline_element = this.get_unformatted('</' + tag_check + '>', tag_complete); //...delegate to get_unformatted function
                 content.push(inline_element);
                 this.tag_type = 'INLINE';
             }
             else if (tag_check.charAt(0) === '!') { // peek for <!-- comment
                 if (tag_check.indexOf('[if') != -1) { // peek for <!--[if conditional comment
                     if (tag_complete.indexOf('!IE') != -1) { // this type needs a closing --> so...
-                        var comment = this.get_unformatted('-->',
-                            tag_complete); //...delegate to get_unformatted
+                        var comment = this.get_unformatted('-->', tag_complete); //...delegate to get_unformatted
                         content.push(comment);
                     }
                     this.tag_type = 'START';
@@ -321,13 +315,11 @@ function style_html(html_source, indent_size, indent_character, max_char, brace_
                     this.tag_type = 'END';
                     this.unindent();
                 } else if (tag_check.indexOf('[cdata[') != -1) { // if it's a <[cdata[ comment...
-                    var comment = this.get_unformatted(']]>',
-                        tag_complete); //...delegate to get_unformatted function
+                    var comment = this.get_unformatted(']]>', tag_complete); //...delegate to get_unformatted function
                     content.push(comment);
                     this.tag_type = 'SINGLE'; //<![CDATA[ comments are treated like single tags
                 } else {
-                    var comment = this.get_unformatted('-->',
-                        tag_complete);
+                    var comment = this.get_unformatted('-->', tag_complete);
                     content.push(comment);
                     this.tag_type = 'SINGLE';
                 }
