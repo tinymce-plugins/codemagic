@@ -1,4 +1,3 @@
-//vatriable definition
 var the = { 
     beautify_in_progress: false,
     coloring_active: true,
@@ -41,27 +40,27 @@ var pluginOptions = {
     onHighlightComplete: onChangeCallback
 }
 
-//language and init
+// language and init
 tinyMCEPopup.requireLangPack();
 tinyMCEPopup.onInit.add(onLoadInit);
 
 
-//onload
+// onload
 function onLoadInit() {
-	tinyMCEPopup.resizeToInnerSize();
+    tinyMCEPopup.resizeToInnerSize();
 
-    // Remove Gecko spellchecking
-	if (tinymce.isGecko)
-		document.body.spellcheck = tinyMCEPopup.editor.getParam("gecko_spellcheck");
+    // remove Gecko spellchecking
+    if (tinymce.isGecko)
+        document.body.spellcheck = tinyMCEPopup.editor.getParam("gecko_spellcheck");
 
-    //insert html from tinymce to htmlSource textarea
-	document.getElementById("htmlSource").value = tinyMCEPopup.editor.getContent({ source_view : true });
+    // insert html from tinymce to htmlSource textarea
+    document.getElementById("htmlSource").value = tinyMCEPopup.editor.getContent({ source_view : true });
     
-    //format the source code using JS Beautifier plugin
+    // format the source code using JS Beautifier plugin
     beautify("htmlSource");
     
     if(the.coloring_active) {
-        //activate syntax coloring
+        // activate syntax coloring
         activateCodeColoring("htmlSource");
     }
     
@@ -73,18 +72,17 @@ function onLoadInit() {
 	document.getElementById('wraptext').checked = false;
     }
 
-    //resize window to fit the textarea
+    // resize window to fit the textarea
     resizeInputs("htmlSource"); 
     
     window.onresize = function(event) {
-        //resize window to fit the textarea
+        // resize window to fit the textarea
         resizeInputs("htmlSource"); 
     }
-
 }
 
 
-//activating syntax coloring
+// activating syntax coloring
 function activateCodeColoring(id) {
     the.coloring_active = true;
     
@@ -98,7 +96,7 @@ function activateCodeColoring(id) {
 }
 
 
-//deactivating syntax coloring
+// deactivating syntax coloring
 function deactivateCodeColoring() {
     the.coloring_active = false;
     
@@ -111,33 +109,33 @@ function deactivateCodeColoring() {
     pluginCodeMirror.toTextArea();
     pluginCodeMirror = null;   
     
-    //resize window to fit the textarea
+    // resize window to fit the textarea
     resizeInputs("htmlSource"); 
 }
 
 function activateWrapText() {
-	the.wraptext_active = true;
+    the.wraptext_active = true;
 
-	var elm = document.getElementById("htmlSource").nextSibling;
-	if (elm.className.indexOf("wrapText") == -1) {
-		elm.className += ' wrapText';
-	}
+    var elm = document.getElementById("htmlSource").nextSibling;
+    if (elm.className.indexOf("wrapText") == -1) {
+        elm.className += ' wrapText';
+    }
 }
 
 function deactivateWrapText() {
-        the.wraptext_active = false;
+    the.wraptext_active = false;
 
-	var elm = document.getElementById("htmlSource").nextSibling;
-	var classes = elm.className.split(" ");
-	var wrap = classes.indexOf("wrapText");
+    var elm = document.getElementById("htmlSource").nextSibling;
+    var classes = elm.className.split(" ");
+    var wrap = classes.indexOf("wrapText");
 
-	if (wrap) {
-		classes.splice(wrap, 1);
-		elm.className = classes.join(" ");
-	}
+    if (wrap) {
+        classes.splice(wrap, 1);
+        elm.className = classes.join(" ");
+    }
 }
 
-//toggle highlighting using a checkbox
+// toggle highlighting using a checkbox
 function toggleHighlighting(elm, id) {
     if (elm.checked) {
         activateCodeColoring(id);
@@ -146,7 +144,7 @@ function toggleHighlighting(elm, id) {
     }
 }
 
-//toggle code autocompletion
+// toggle code autocompletion
 function toggleAutocompletion(elm) {
     if (elm.checked) {
         the.autocompletion_active = true;
@@ -155,7 +153,7 @@ function toggleAutocompletion(elm) {
     }
 }     
 
-//toggle text wrapping
+// toggle text wrapping
 function toggleWrapText(elm) {
     if (elm.checked) {
         activateWrapText();
@@ -164,38 +162,41 @@ function toggleWrapText(elm) {
     }
 }     
 
-//save content bact to tinymce editor
+// save content bact to tinymce editor
 function saveContent() {
     tinyMCEPopup.editor.setContent(pluginCodeMirror.getValue(), { source_view : true }); 
     tinyMCEPopup.close();
 }
 
 
-//resize textarea input
+// resize textarea input
 function resizeInputs(id) {
-	var vp = tinyMCEPopup.dom.getViewPort(window), el;
+    var vp = tinyMCEPopup.dom.getViewPort(window), el;
 
-	el = document.getElementById(id);
+    el = document.getElementById(id);
 
-	if (el) {
-		//el.style.width = (vp.w - 20) + "px";
-		el.style.height = (vp.h - 65) + "px";
-	}
+    if (el) {
+        // el.style.width = (vp.w - 20) + "px";
+        el.style.height = (vp.h - 65) + "px";
+    }
 }
 
 
-//toggle search window
+// toggle search window
 function toggleSearch(elm, id) {
-    if(!the.coloring_active) return false;
+    if (!the.coloring_active)
+        return false;
     
     elm.className = "";
     var element = document.getElementById(id);
     
-    if(element.style.display == "none") {
+    if (element.style.display == "none") {
         elm.className = "selected";
         element.style.display = "block";
     }
-    else element.style.display = "none";
+    else {
+        element.style.display = "none";
+    }
 }
 
 
@@ -291,19 +292,19 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
 CodeMirror.defineMIME("text/html", "htmlmixed");
 
 ////////////////////////
-//undo last action 
+// undo last action 
 function undo() {
     pluginCodeMirror.undo();                       
 } 
 
 
-//redo last action
+// redo last action
 function redo() {
     pluginCodeMirror.redo();
 }
 
 
-//callback to onchange event on editor
+// callback to onchange event on editor
 function onChangeCallback(editor) {
     var undo = editor.historySize().undo;
     var redo = editor.historySize().redo;
@@ -316,7 +317,7 @@ function onChangeCallback(editor) {
 }
  
 //////////////////////// 
-//reintendt html source code
+// reintendt html source code
 function reIntendt(id) {
     if(!the.coloring_active) return false;
     
@@ -327,15 +328,15 @@ function reIntendt(id) {
 }
   
 ////////////////////////
-//search and replace
+// search and replace
 
-//unmarks all searched words
+// unmarks all searched words
 function unmark() {
     for (var i = 0; i < marked.length; ++i) marked[i]();
     marked.length = 0;
 }   
 
-//search for query from #query input
+// search for query from #query input
 function searchCode() {
     unmark();
     
@@ -361,7 +362,7 @@ function searchCode() {
     lastQuery = text; lastPos = cursor.to();
 }
 
-//replace
+// replace
 function replaceCode() {
     unmark();
     
@@ -381,7 +382,7 @@ function replaceCode() {
 
 
 ////////////////////////
-//autocompletion  
+// autocompletion  
 var tagNames = ("a abbr acronym address applet area b base basefont bdo big blockquote body br button" + 
                 " caption center cite code col colgroup dd del dfn dir div dl dt em fieldset font form frame " +
                 " frameset h1 h2 h3 h4 h5 h6 head hr html i iframe img input ins isindex kbd label legend li link map" +
@@ -443,7 +444,7 @@ Array.prototype.inArray = function(value){
 
 
 
-//autocompletion start
+// autocompletion start
 function startComplete() {
     var startingTag, unPaired;
     
@@ -465,7 +466,7 @@ function startComplete() {
         return;
     }         
     
-    //get the tags    
+    // get the tags    
     var completions = getCompletions(token, startingTag);
     if (!completions.length) return;
     
@@ -473,10 +474,10 @@ function startComplete() {
     function insert(str) {
         if(str == "") return;
         
-        //trim
+        // trim
         str = str.replace(/^\s+|\s+$/g,"");
         
-        //is this an unpaired tag?                
+        // is this an unpaired tag?                
         unPaired = unPairedTags.inArray(str) ? true : false;
     
         if(specialTags[str] != null && startingTag) {
@@ -522,7 +523,7 @@ function startComplete() {
     var pos = pluginCodeMirror.cursorCoords();
     complete.style.left = pos.x + "px";
     
-    //top position
+    // top position
     if(pos.yBot > 448) pos.yBot = pos.yBot - 165;
     complete.style.top = pos.yBot + "px";
     
@@ -543,7 +544,7 @@ function startComplete() {
         }, 50);
     }
     
-    //bind events
+    // bind events
     connect(sel, "blur", close);
     connect(sel, "keydown", function(event) {
         var code = event.keyCode;
@@ -554,9 +555,8 @@ function startComplete() {
         else if (code == 27) {
             event.stop(); close(); pluginCodeMirror.focus();                                                   
         }
-        //other than arrow up/down
+        // other than arrow up/down
         else if (code != 38 && code != 40 && code != 16 && code != 17 && code != 18 && code != 91 && code != 92) {
-            console.log([code]);                        
             close(); 
             pluginCodeMirror.focus(); 
             if(code != 39 && code != 37) setTimeout(startComplete, 50); 
@@ -605,15 +605,14 @@ function getCompletions(token, startingTag) {
 *  others.
 */
 function beautify(id) {
-    
-    if (the.beautify_in_progress) return;
+    if (the.beautify_in_progress)
+        return;
+
     the.beautify_in_progress = true;
-    
     var source = document.getElementById(id).value.replace(/^\s+/, '');
-    
     var indent_size = 4;
     var indent_char = ' ';
-    var brace_style = 'collapse';  //collapse, expand, end-expand 
+    var brace_style = 'collapse';  // collapse, expand, end-expand 
     
     document.getElementById(id).value = style_html(source, indent_size, indent_char, 120, brace_style);
     the.beautify_in_progress = false;
