@@ -97,7 +97,14 @@ function setup_editor()
         tabMode       : 'indent',
         lineWrapping  : true,
         autoCloseTags : true,
-        theme         : 'default'
+        theme         : 'default',
+        foldGutter    : true,
+        gutters       : ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+        extraKeys     : {
+            'Ctrl-Q': function(cm) {
+                cm.foldCode(cm.getCursor());
+            }
+        }
     });
     var settings = get_settings();
     if (settings.theme) {

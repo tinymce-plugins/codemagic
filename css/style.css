@@ -61,3 +61,7 @@ a img {
 #headerContainer,#mceActionPanel {
     overflow-y: auto;
 }
+
+.nowrap {
+    white-space: nowrap;
+}
