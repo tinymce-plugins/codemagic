@@ -40,7 +40,7 @@ function save()
 function resize()
 {
     var vp = tinyMCEPopup.dom.getViewPort(window);
-    var size = vp.h - 85
+    var size = vp.h - 100
         - document.getElementById('headerContainer').offsetHeight;
         - document.getElementById('mceActionPanel').offsetHeight;
     cmEditor.setSize('100%', size + 'px');
@@ -90,10 +90,11 @@ function setup_editor()
     cmEditor = CodeMirror.fromTextArea(document.getElementById('htmlSource'), {
         mode          : 'text/html',
         width         : '100%',
-        height        : '380px',
+        height        : '350px',
         autofocus     : true,
         lineNumbers   : true,
         matchBrackets : true,
+        matchTags     : { bothTags: true },
         tabMode       : 'indent',
         lineWrapping  : true,
         autoCloseTags : true,
@@ -101,9 +102,8 @@ function setup_editor()
         foldGutter    : true,
         gutters       : ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
         extraKeys     : {
-            'Ctrl-Q': function(cm) {
-                cm.foldCode(cm.getCursor());
-            }
+            'Ctrl-Q': function(cm) { cm.foldCode(cm.getCursor()); },
+            'Ctrl-J': 'toMatchingTag'
         }
     });
     var settings = get_settings();

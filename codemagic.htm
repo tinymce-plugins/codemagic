@@ -12,11 +12,12 @@
     <script type="text/javascript" src="js/codemirror/addon/search/searchcursor.js"></script>
     <script type="text/javascript" src="js/codemirror/addon/dialog/dialog.js"></script>
     <script type="text/javascript" src="js/codemirror/addon/edit/closetag.js"></script>
+    <script type="text/javascript" src="js/codemirror/addon/edit/matchtags.js"></script>
+    <script type="text/javascript" src="js/codemirror/addon/fold/foldcode.js"></script>
+    <script type="text/javascript" src="js/codemirror/addon/fold/foldgutter.js"></script>
     <script type="text/javascript" src="js/codemirror/addon/fold/xml-fold.js"></script>
     <script type="text/javascript" src="js/codemirror/addon/fold/comment-fold.js"></script>
     <script type="text/javascript" src="js/codemirror/addon/fold/brace-fold.js"></script>
-    <script type="text/javascript" src="js/codemirror/addon/fold/foldcode.js"></script>
-    <script type="text/javascript" src="js/codemirror/addon/fold/foldgutter.js"></script>
     <script type="text/javascript" src="js/codemagic.js"></script>
     <link href="js/codemirror/lib/codemirror.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="js/codemirror/addon/dialog/dialog.css" media="screen" rel="stylesheet" type="text/css" />
@@ -49,11 +50,6 @@
     <link href="js/codemirror/theme/xq-dark.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="js/codemirror/theme/xq-light.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="css/style.css" media="screen" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        .CodeMirror.cm-s-default {
-            border: 1px solid #bbbbbb;
-        }
-    </style>
 </head>
 
 <body onresize="resize();" style="display:none; overflow: hidden;">
@@ -108,7 +104,8 @@
 
         <div class="mceActionPanel" id="mceActionPanel">
             <p style="margin-top:0;" id="searchKeys"><strong>{#codemagic_dlg.search}</strong>: Ctrl-F / Cmd-F, <strong>{#codemagic_dlg.find_next}</strong>: Ctrl-G / Cmd-G, <strong>{#codemagic_dlg.find_previous}</strong>: Shift-Ctrl-G / Shift-Cmd-G<br />
-            <strong>{#codemagic_dlg.replace}</strong>: Shift-Ctrl-F / Cmd-Option-F, <strong>{#codemagic_dlg.replace_all}</strong>: Shift-Ctrl-R / Shift-Cmd-Option-F</p>
+            <strong>{#codemagic_dlg.replace}</strong>: Shift-Ctrl-F / Cmd-Option-F, <strong>{#codemagic_dlg.replace_all}</strong>: Shift-Ctrl-R / Shift-Cmd-Option-F<br />
+            <strong>Match tag</strong>: Ctrl-J, <strong>Code (un)fold</strong>: Ctrl-Q</p>
             <input type="submit" role="button" name="insert" value="{#update}" id="insert" />
             <input type="button" role="button" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" id="cancel" />
         </div>
